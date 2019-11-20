@@ -8,6 +8,9 @@ Run Lazarus from docker with noVnc
 <b> VNC </b>
 Porta: 6080 => para acesso no browser pelo noVnc -> botão direito e abre um menu no x11vnc -> desenvolvimento -> Lazarus
 
+<img src="img/gitpod_lazarus.png">
+
 <b>FPC</b>
 Para FPC, pode implementar no VSCode e compilar diretamento no prompt
+<img src="img/gitpod_fpc.png">
 
