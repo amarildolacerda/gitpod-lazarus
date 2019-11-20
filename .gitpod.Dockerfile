@@ -1,32 +1,17 @@
-FROM alpine:3.7
+FROM debian:latest
+MAINTAINER gabrielrcouto <gabrielrcouto@gmail.com>
 
-#MAINTAINER Carlos Lopes "cmplopes67@gmail.com"
+# Installing packages
+RUN apt-get update && apt-get upgrade -y
 
-ENV FPC_VERSION="3.0.4" \
-    FPC_ARCH="x86_64-linux"
+RUN apt-get install -y wget binutils gcc libgtk2.0-0 libgtk2.0-dev psmisc vnc4server
 
-RUN apk add --no-cache binutils && \
-    cd /tmp && \
-    wget "ftp://ftp.hu.freepascal.org/pub/fpc/dist/${FPC_VERSION}/${FPC_ARCH}/fpc-${FPC_VERSION}.${FPC_ARCH}.tar" -O fpc.tar && \
-    tar xf "fpc.tar" && \
-    cd "fpc-${FPC_VERSION}.${FPC_ARCH}" && \
-    rm demo* doc* && \
-    \
-    # Workaround musl vs glibc entrypoint for `fpcmkcfg`
-    mkdir /lib64 && \
-    ln -s /lib/ld-musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
-    \
-    echo -e '/usr\nN\nN\nN\n' | sh ./install.sh && \
-    find "/usr/lib/fpc/${FPC_VERSION}/units/${FPC_ARCH}/" -type d -mindepth 1 -maxdepth 1 \
-    -not -name 'fcl-base' \
-    -not -name 'rtl' \
-    -not -name 'rtl-console' \
-    -not -name 'rtl-objpas' \
-    -exec rm -r {} \; && \
-    rm -r "/lib64" "/tmp/"*
+RUN wget http://downloads.sourceforge.net/project/lazarus/Lazarus%20Linux%20amd64%20DEB/Lazarus%201.6/fpc_3.0.0-151205_amd64.deb && dpkg -i fpc_3.0.0-151205_amd64.deb && rm fpc_3.0.0-151205_amd64.deb
 
-RUN apk add --no-cache bash bash-doc bash-completion
+RUN wget http://downloads.sourceforge.net/project/lazarus/Lazarus%20Linux%20amd64%20DEB/Lazarus%201.6/fpc-src_3.0.0-151205_amd64.deb && dpkg -i fpc-src_3.0.0-151205_amd64.deb && rm fpc-src_3.0.0-151205_amd64.deb
 
-WORKDIR /source
+RUN wget http://downloads.sourceforge.net/project/lazarus/Lazarus%20Linux%20amd64%20DEB/Lazarus%201.6/lazarus_1.6-0_amd64.deb && dpkg -i lazarus_1.6-0_amd64.deb && rm lazarus_1.6-0_amd64.deb
 
-CMD fpc -iV
+RUN apt-get clean && apt-get autoremove -y
+
+EXPOSE 5901
