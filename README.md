@@ -1,2 +1,2 @@
 # gitpod-pascal
-Rodar pascal no browser
+Run Lazarus from docker with noVnc
