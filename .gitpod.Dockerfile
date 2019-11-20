@@ -1,4 +1,4 @@
-FROM FROM gitpod/workspace-full-vnc
+FROM gitpod/workspace-full-vnc
 
 # Installing packages
 RUN apt-get update && apt-get upgrade -y
