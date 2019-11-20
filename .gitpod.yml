@@ -9,9 +9,9 @@ ports:
 tasks:
   - before: |
     init: |
-      command: echo 'Install fp-compiler ....'
-      apt-get install fp-compiler
-      command: echo '.... Installed'
+      echo 'Install fp-compiler ....'
+      #apt-get install fp-compiler
+      echo '.... Installed'
 
   - init: echo 'init script' # runs during prebuild
     command: echo '...'
