@@ -9,10 +9,12 @@ ports:
 tasks:
   - before: |
     init: |
+      command: echo 'Install fp-compiler ....'
       apt-get install fp-compiler
+      command: echo '.... Installed'
 
   - init: echo 'init script' # runs during prebuild
-    command: echo 'start script'
+    command: echo '...'
 
 vscode:
   extensions:
