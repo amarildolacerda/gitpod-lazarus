@@ -1,7 +1,9 @@
 program programa1;
 
+uses sysutils;
+
 begin
 
-   writeln('teste 1');
+   writeln('Now: '+DateTimeToStr(now));
 
 end.
